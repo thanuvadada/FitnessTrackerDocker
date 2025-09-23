@@ -20,7 +20,11 @@ services:
       - "2025:2000"
     depends_on:
       - mysqldb
-    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/klustudentdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: docker
+    restart: unless-stopped
     networks:
       - springboot-mysql-net
 
@@ -31,7 +35,7 @@ services:
       - "3000:80"
     depends_on:
       - backend
-    restart: on-failure
+    restart: unless-stopped
     networks:
       - springboot-mysql-net
 

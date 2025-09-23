@@ -1,4 +1,4 @@
-name: Docker Fullstack Finesstracker
+name: Build and Push Docker Images
 
 on:
   push:
@@ -29,7 +29,8 @@ jobs:
           context: ./backend
           file: ./backend/backend.Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fitness-backend:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/fitness-backend:latest
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v5
@@ -37,4 +38,5 @@ jobs:
           context: ./frontend/calisthenix
           file: ./frontend/calisthenix/frontend.Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/fitness-frontend:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/fitness-frontend:latest
